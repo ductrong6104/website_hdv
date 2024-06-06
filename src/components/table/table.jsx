@@ -1,16 +1,22 @@
 // components/FlexibleTable.js
-
+'use client'
 import React from 'react';
 import "./table.global.css";
 import { useState } from 'react';
-const FlexibleTable = ({ data, headerNames }) => {
+import { useRouter } from 'next/navigation';
+// get current path
+import { usePathname } from 'next/navigation';
+const FlexibleTable = ({ data, headerNames, onSort }) => {
   if (!data || data.length === 0) return <p>No data available</p>;
 
   // Lấy danh sách các khóa của đối tượng đầu tiên làm tiêu đề bảng
   const headers = Object.keys(data[0]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [filters, setFilters] = useState({});
+  const [showFilterInput, setShowFilterInput] = useState(null);
   const rowsPerPage = 10;
-
+  const router = useRouter();
+  const pathname = usePathname()
   // Tính toán số lượng trang
   const totalPages = Math.ceil(data.length / rowsPerPage);
 
@@ -24,6 +30,11 @@ const FlexibleTable = ({ data, headerNames }) => {
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+
+  const handleClickEdit = (id) => {
+    // Lấy đường dẫn hiện tại
+    router.push(`${pathname}/edit/${id}`)
+  }
   return (
     <>
    
@@ -31,8 +42,16 @@ const FlexibleTable = ({ data, headerNames }) => {
     <table className='bg-blue mb-2'>
       <thead>
         <tr className='bg-blue-400 text-white'>
-          {headerNames.map((header) => (
-            <th className='p-2 border-2 rounded-md' key={header}>{header}</th>
+          {headerNames.map((header, index) => (
+            <th className='p-2 border-2 rounded-md' key={header}>
+              {header}
+              <span
+                className="cursor-pointer"
+                onClick={() => onSort(headers[index])}
+              >
+                ⬆️⬇️
+              </span>
+            </th>
           ))}
           <th>Chỉnh sửa</th>
         </tr>
@@ -48,7 +67,7 @@ const FlexibleTable = ({ data, headerNames }) => {
               >{row[header] === null ? '' : row[header]} {header === 'maxPerson' ? (row[header] > 0 ? 'Người' : ''): ''} 
               {header === 'width' || header === 'height' ? (row[header] > 0 ? 'm^2' : ''): ''}</td>
             ))}
-            <td className='text-center'><button>Edit</button></td>
+            <td className='text-center'><button onClick={() => handleClickEdit(row.id)}>Edit</button></td>
           </tr>
         ))}
       </tbody>

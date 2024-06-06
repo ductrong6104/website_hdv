@@ -53,7 +53,7 @@ const AddHotelForm = (
       setCommunes([]);
     }
       
-  }, [province, district]) 
+  }, [province, district])
   useEffect(() => {
     if (province){
       getDistrictByProvinceId(province).then((res) => {

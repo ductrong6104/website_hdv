@@ -23,14 +23,15 @@ export default function HotelLayout({
   return (
     <>
       <div className="flex justify-center mb-4">
-      <h1>Tên khách sạn: {nameHotel}</h1>
+      <div className="text-4xl text-pink-400">Tên khách sạn: {nameHotel}</div>
       </div>
       
       <nav className={`items-center flex justify-start mb-4`}>
                 <Link className="mr-4 rounded-md border-2 p-2 bg-blue-400" href={`/hotel/${params.hotelId}`}>Trang chủ</Link>
                 <Link className="mr-4 rounded-md border-2 p-2 bg-blue-400" href={`/hotel/${params.hotelId}/roomClass`}>Quản lý hạng phòng</Link>
                 <Link className="mr-4 rounded-md border-2 p-2 bg-blue-400" href={`/hotel/${params.hotelId}/room`}>Quản lý phòng</Link>
-                <Link className="mr-4 rounded-md border-2 p-2 bg-blue-400" href={`/hotel/${params.hotelId}/roomSale`}>Đăng bán phòng</Link>
+                <Link className="mr-4 rounded-md border-2 p-2 bg-blue-400" href={`/hotel/${params.hotelId}/bedType`}>Quản lý loại giường</Link>
+
                 
             </nav>
           <div className="rounded-md border-2 p-2 h-screen">

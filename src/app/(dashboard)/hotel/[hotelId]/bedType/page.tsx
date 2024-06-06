@@ -1,16 +1,17 @@
 'use client'
 import { useEffect, useState } from "react";
 import FlexibleTable from "@/components/table/table";
-import { getRoomClassByHotelId } from "@/modules/hotel_roomClass/service";
+
 import Link from "next/link";
-const PageRoomClass = ({params}) =>{
+import { getBedTypeByHotelId } from "@/modules/roomClass_bedType/service";
+const PageBedType = ({params}) =>{
     const [data, setData] = useState([]);
     const [sortConfig, setSortConfig] = useState({ key: null, direction: 'ascending' });
   useEffect(() => {
-    getRoomClassByHotelId(params.hotelId).then((res) => {
-        if (res.status == 200){
-            setData(res.data);
-        }
+    getBedTypeByHotelId(params.hotelId).then((res) => {
+      if (res.status === 200){
+        setData(res.data);
+      }
     })
   }, []);
   const handleSort = (key: any) => {
@@ -34,14 +35,14 @@ const PageRoomClass = ({params}) =>{
 
   return (
     <div>
-    <Link className="bg-green-500 rounded-md border-2 p-2" href={`/hotel/${params.hotelId}/roomClass/newRoomClass`}>+ Tạo hạng phòng mới</Link>
-    <Link className="bg-green-500 rounded-md border-2 p-2" href={`/hotel/${params.hotelId}/roomClass/roomClassApply`}>+ Áp dụng hạng phòng</Link>
+    <Link className="bg-green-500 rounded-md border-2 p-2" href={`/hotel/${params.hotelId}/bedType/newBedType`}>+ Tạo loại giường mới</Link>
+    <Link className="bg-green-500 rounded-md border-2 p-2" href={`/hotel/${params.hotelId}/bedType/bedTypeApply`}>+ Áp dụng loại giường</Link>
     <div className="flex justify-center mt-2">
-        <h1 className="text-3xl mb-2">Danh sách hạng phòng của khách sạn</h1>
+        <h1 className="text-3xl mb-2">Danh sách loại giường của khách sạn</h1>
     </div>
       
-      <FlexibleTable data={data} headerNames={['Mã', 'Tên hạng phòng']} onSort={handleSort} />
+      <FlexibleTable data={data} headerNames={['Mã', 'Tên loại giường']} onSort={handleSort} />
     </div>
   );
 }
-export default PageRoomClass
+export default PageBedType

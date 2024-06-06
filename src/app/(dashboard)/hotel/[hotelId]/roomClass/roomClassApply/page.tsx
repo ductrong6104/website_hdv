@@ -1,6 +1,6 @@
 import FrmApplyRoomClass from "@/components/form/formRoomClassApply"
 
-const PageNewRoomClass = ({params}) =>{
+const PageApplyRoomClass = ({params}) =>{
     return (
         <>
             <FrmApplyRoomClass params={params}></FrmApplyRoomClass>
@@ -8,4 +8,4 @@ const PageNewRoomClass = ({params}) =>{
         
     )
 }
-export default PageNewRoomClass
+export default PageApplyRoomClass

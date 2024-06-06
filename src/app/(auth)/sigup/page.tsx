@@ -1,7 +1,9 @@
+import FrmSigup from "@/components/form/formSigup"
+
 const SigupPage =() => {
     return (
         <>
-            <h1>Sigup page</h1>
+            <FrmSigup></FrmSigup>
         </>
     )
 }
