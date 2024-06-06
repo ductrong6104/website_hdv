@@ -29,7 +29,7 @@ function FrmCreateUser({params}) {
     formData.idAccount = params.accountId;
     formData.idRole = '2';
 
-    alert(JSON.stringify(formData))
+    // alert(JSON.stringify(formData))
     // Lưu thông tin người dùng vào Singleton
     // const userSession = UserSession.getInstance();
     // userSession.setUser(1);

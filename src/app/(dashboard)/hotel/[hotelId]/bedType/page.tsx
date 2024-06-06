@@ -4,7 +4,9 @@ import FlexibleTable from "@/components/table/table";
 
 import Link from "next/link";
 import { getBedTypeByHotelId } from "@/modules/roomClass_bedType/service";
+import { usePathname } from "next/navigation";
 const PageBedType = ({params}) =>{
+  const pathname = usePathname();
     const [data, setData] = useState([]);
     const [sortConfig, setSortConfig] = useState({ key: null, direction: 'ascending' });
   useEffect(() => {
@@ -37,6 +39,7 @@ const PageBedType = ({params}) =>{
     <div>
     <Link className="bg-green-500 rounded-md border-2 p-2" href={`/hotel/${params.hotelId}/bedType/newBedType`}>+ Tạo loại giường mới</Link>
     <Link className="bg-green-500 rounded-md border-2 p-2" href={`/hotel/${params.hotelId}/bedType/bedTypeApply`}>+ Áp dụng loại giường</Link>
+    <Link className="bg-green-500 rounded-md border-2 p-2" href={`${pathname}/bedTypeByRoomClass`}>+ Xem loại giường theo hạng phòng</Link>
     <div className="flex justify-center mt-2">
         <h1 className="text-3xl mb-2">Danh sách loại giường của khách sạn</h1>
     </div>

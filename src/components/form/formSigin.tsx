@@ -35,7 +35,7 @@ function FrmSigin() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    alert(JSON.stringify(formData));
+    // alert(JSON.stringify(formData));
     // Lưu thông tin người dùng vào Singleton
     // const userSession = UserSession.getInstance();
     // userSession.setUser(1);
@@ -77,6 +77,12 @@ function FrmSigin() {
             })
           }
         })
+      }
+      else if(res.code == 400){
+        alert("Email này chưa được đăng ký")
+      }
+      else if(res.code == 403){
+        alert("Mật khẩu sai!")
       }
       
     })
