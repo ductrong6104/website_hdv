@@ -27,7 +27,7 @@ const AddHotelForm = (
   const router = useRouter();
   const [district, setDistrict] = useState('');
   const [province, setProvince] = useState('');
-
+  const [reload, setReload] = useState(false);
   const [hotelTypes, setHotelTypes] = useState([]);
   const [communes, setCommunes] = useState([]);
   const [districts, setDistricts] = useState([]);
@@ -44,7 +44,7 @@ const AddHotelForm = (
                 value: commune.id,
                 label: commune.communeName,
               })))
-            hotelData.communeId = '';
+            // hotelData.communeId = '';
               
           }
       })
@@ -53,7 +53,7 @@ const AddHotelForm = (
       setCommunes([]);
     }
       
-  }, [province, district])
+  }, [reload])
   useEffect(() => {
     if (province){
       getDistrictByProvinceId(province).then((res) => {
@@ -62,8 +62,9 @@ const AddHotelForm = (
             value: district.id,
             label: district.districtName,
           })))
+          setReload(!reload);
           // setDistrict('');
-          setDistrict('0');
+          // setDistrict('0');
           
         }
             
@@ -74,23 +75,29 @@ const AddHotelForm = (
       setDistricts([]);
 
     }
-  }, [province]) 
+  }, [reload]) 
   useEffect(() => {
     getAllProvince().then((res) => {
-        if (res.status === 200)
-            setProvinces(res.data.map((province: any) => ({
-              value: province.id,
-              label: province.provinceName,
-            })))
+        if (res.status === 200){
+          setProvinces(res.data.map((province: any) => ({
+            value: province.id,
+            label: province.provinceName,
+          })))
+          
+        }
+            
     })
   }, []) 
   useEffect(() => {
     getAllHotelType().then((res) => {
-        if (res.status === 200)
-            setHotelTypes(res.data.map((hotelType: any) => ({
-              value: hotelType.id,
-              label: hotelType.hotelTypeName,
-            })))
+        if (res.status === 200){
+          setHotelTypes(res.data.map((hotelType: any) => ({
+            value: hotelType.id,
+            label: hotelType.hotelTypeName,
+          })))
+          
+        }
+            
     })
   }, []) 
 
@@ -133,10 +140,14 @@ const AddHotelForm = (
   const handleChangeProvince = (e: any) => {
     const { name, value } = e.target;
     setProvince(value);
+    setReload(!reload);
+   
   }
   const handleChangeDistrict = (e: any) => {
     const { name, value } = e.target;
     setDistrict(value);
+    setReload(!reload);
+    
   }
 
   return (
